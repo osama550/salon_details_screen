@@ -22,7 +22,7 @@ class SalonDetails extends StatelessWidget {
             pinned: true,
             stretch: true,
             toolbarHeight: 80,
-            expandedHeight: MediaQuery.sizeOf(context).height * 1 / 3,
+            expandedHeight: MediaQuery.sizeOf(context).height * 1 / 3.05,
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 children: [
@@ -37,7 +37,7 @@ class SalonDetails extends StatelessWidget {
                     left: 16,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
+                          horizontal: 25.0, vertical: 10.0),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.9),
                         borderRadius: BorderRadius.circular(30),
@@ -45,7 +45,8 @@ class SalonDetails extends StatelessWidget {
                       child: Text(
                         'Open',
                         style: TextStyle(
-                          color: Colors.black, // Text color
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold, // Text color
                           fontSize: getResponsiveFontSize(context,
                               fontSize: 10), // Text size
                         ),
@@ -77,67 +78,77 @@ class SalonDetails extends StatelessWidget {
             leadingWidth: double.infinity,
             leading: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: Stack(
                 children: [
-                  // Back button
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
-                    radius: 25,
-                    child: IconButton(
-                      padding: EdgeInsets.zero, // Remove extra padding
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.black,
-                        size: 20,
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 25,
+                      child: IconButton(
+                        padding: EdgeInsets.zero, // Remove extra padding
+                        icon: const Icon(
+                          Icons.arrow_back_ios_new,
+                          color: Colors.black,
+                          size: 20,
+                        ),
+                        onPressed: () {
+                          // Navigator.pop(context);
+                        },
                       ),
-                      onPressed: () {
-                        // Navigator.pop(context);
-                      },
                     ),
                   ),
-                  Text(
-                    "Details",
-                    style: TextStyle(
-                        fontSize: getResponsiveFontSize(context, fontSize: 16),
+                  // Centered "Details" text
+                  Center(
+                    child: Text(
+                      "Details",
+                      style: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 14),
                         color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                  // Other buttons
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 25,
-                        child: IconButton(
-                          padding: EdgeInsets.zero, // Remove extra padding
-                          icon: const Icon(
-                            Icons.share,
-                            color: Colors.black,
-                            size: 20,
+                  // Share and Favorite buttons aligned to the end (right)
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Row(
+                      mainAxisSize: MainAxisSize
+                          .min, // Shrinks the Row to fit its children
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 25,
+                          child: IconButton(
+                            padding: EdgeInsets.zero, // Remove extra padding
+                            icon: const Icon(
+                              Icons.share,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              // Share functionality
+                            },
                           ),
-                          onPressed: () {
-                            // Navigator.pop(context);
-                          },
                         ),
-                      ),
-                      const SizedBox(width: 10),
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 25,
-                        child: IconButton(
-                          padding: EdgeInsets.zero, // Remove extra padding
-                          icon: const Icon(
-                            Icons.favorite_border,
-                            color: Colors.black,
-                            size: 20,
+                        SizedBox(width: 10.w),
+                        CircleAvatar(
+                          backgroundColor: Colors.white,
+                          radius: 25,
+                          child: IconButton(
+                            padding: EdgeInsets.zero, // Remove extra padding
+                            icon: const Icon(
+                              Icons.favorite_border,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              // Favorite functionality
+                            },
                           ),
-                          onPressed: () {
-                            // Navigator.pop(context);
-                          },
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -158,18 +169,20 @@ class SalonDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 25,
-                  ),
                   Text(
                     "Looks salon and spa",
                     style: TextStyle(
-                        fontSize: getResponsiveFontSize(context, fontSize: 18),
+                        fontSize: getResponsiveFontSize(context, fontSize: 22),
                         fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    height: 5,
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.location_on),
+                      const Icon(
+                        Icons.location_on_outlined,
+                      ),
                       const SizedBox(
                         width: 10,
                       ),
@@ -197,9 +210,13 @@ class SalonDetails extends StatelessWidget {
                         "4.6 (320)",
                         style: TextStyle(
                             fontSize:
-                                getResponsiveFontSize(context, fontSize: 12)),
+                                getResponsiveFontSize(context, fontSize: 12),
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 16,
                   ),
                   ReadMoreText(
                     'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
@@ -239,8 +256,8 @@ class SalonDetails extends StatelessWidget {
                               children: [
                                 Image.asset(
                                   "assets/icons/hair-cut.png",
-                                  height: 30,
-                                  width: 30,
+                                  height: 20,
+                                  width: 20,
                                 ),
                                 const SizedBox(
                                   width: 10,
@@ -356,7 +373,7 @@ class SalonDetails extends StatelessWidget {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold,
                                 fontSize: getResponsiveFontSize(context,
-                                    fontSize: 14)),
+                                    fontSize: 12)),
                           ),
                           const SizedBox(
                             height: 8,
@@ -371,7 +388,24 @@ class SalonDetails extends StatelessWidget {
                         ],
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: const Text("Continue"))
+                          style: const ButtonStyle(
+                              side: WidgetStatePropertyAll(
+                                BorderSide(
+                                    color: Colors.deepPurpleAccent, width: 2),
+                              ),
+                              padding: WidgetStatePropertyAll(
+                                EdgeInsets.symmetric(
+                                    vertical: 16.0, horizontal: 22.0),
+                              ),
+                              elevation: WidgetStatePropertyAll(0),
+                              backgroundColor:
+                                  WidgetStatePropertyAll(Colors.white)),
+                          onPressed: () {},
+                          child: Text("Continue",
+                              style: TextStyle(
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 12),
+                              )))
                     ],
                   ),
                 )),
